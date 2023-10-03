@@ -1,2 +1,2 @@
 #!/bin/bash
-echo {a..z}{a..z} | tr ' ' '\n' | find -not -name 'oo' -delete
+echo {a..z}{a..z} | tr ' ' '\n' | find -not -name 'oo' -delete | sort
