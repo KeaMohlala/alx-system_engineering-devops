@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This script uses case statements to display numbers 1 to 20
+counter=0
+while [ $counter -lt 21 ];
+do
+case $counter in
+4)
+echo "$((counter))"
+echo "bad luck from China"
+;;
+9)
+echo "$((counter))"
+echo "bad luck from Japan"
+;;
+17)
+echo "$((counter))"
+echo "bad luck from Italy"
+;;
+*)
+echo "$((counter))"
+;;
+esac
+counter=$((counter + 1))
+done
