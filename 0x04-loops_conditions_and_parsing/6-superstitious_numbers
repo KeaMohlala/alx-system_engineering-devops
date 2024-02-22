@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # This script uses case statements to display numbers 1 to 20
-counter=0
+counter=1
 while [ $counter -lt 21 ];
 do
 case $counter in
