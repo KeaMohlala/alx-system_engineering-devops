@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# script to configure Nginx for redirection
+
+apt update
+apt install nginx -y
+
+echo "Hello World!" > /var/www/html/index.html
+
+# Create a temporary file with the redirection rule
+echo -e "\tserver_name _;
+\tlocation /redirect_me {
+\t\treturn 301 https://www.linkedin.com/in/keamogetse-mohlala/;
+\t}" > /tmp/new_config
+
+# Insert the redirection rule into the existing Nginx configuration
+sed -i '/server_name _;/{
+    r /tmp/new_config
+    d
+}' /etc/nginx/sites-available/default
+
+# Test the Nginx configuration for syntax errors
+# If the test is successful, reload Nginx to apply the changes
+if ! nginx -t
+then
+    service nginx reload
+else
+    echo "Nginx configuration test failed"
+    exit 1
+fi
