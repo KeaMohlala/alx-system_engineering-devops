@@ -1,4 +1,4 @@
-#!/bin/bash/env bash
+#!/usr/bin/env bash
 # This script installs and configures HAproxy on the 'lb-01' server
 
 # Update package lists
