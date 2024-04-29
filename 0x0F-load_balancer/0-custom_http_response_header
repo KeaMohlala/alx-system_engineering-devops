@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script configures a new Ubuntu server to run a Nginx web server
+# and returns a custom HTTP response header
+
+apt update
+apt install
+
+# define Nginx configuration file path
+nginx_config_file="/etc/nginx/conf.d/custom_header.conf"
+
+# add custom header to Nginx configuration
+echo "add_header X-Served-By \$hostname;" >> $nginx_config_file
+
+service nginx restart
