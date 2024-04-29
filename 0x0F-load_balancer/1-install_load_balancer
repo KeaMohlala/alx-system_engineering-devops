@@ -21,4 +21,4 @@ EOF
 
 # Verify configuration and restart HAProxy
 haproxy -c -f /etc/haproxy/haproxy.cfg
-service restart haproxy
+service haproxy restart
