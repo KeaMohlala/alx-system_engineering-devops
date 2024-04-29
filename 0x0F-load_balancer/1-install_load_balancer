@@ -9,15 +9,14 @@ apt-get install -y haproxy
 
 # Configure HAProxy
 cat <<EOF | tee /etc/haproxy/haproxy.cfg
-frontend retiredscientist_front
+frontend http_retiredscientist_front
     bind *:80
-    mode http
-    default_backend retiredscientist_back
+    default_backend http_retiredscientist_back
 
-backend retiredscientist_back
+backend http_retiredscientist_back
     balance roundrobin
-    server 530824-web-01 web-01.retiredscientist.tech:80 check
-    server 530824-web-02 web-02.retiredscientist.tech:80 check
+    server 530824-web-01 34.207.237.99:80 check
+    server 530824-web-02 52.86.184.63:80 check
 EOF
 
 # Verify configuration and restart HAProxy
