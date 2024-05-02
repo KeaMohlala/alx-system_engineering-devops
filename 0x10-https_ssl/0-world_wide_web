@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# This script configures subdomains to web server IP address
+
+# Function to display DNS record information
+display_dns_record() {
+    local record_type 
+    record_type=$(echo "$1" | awk '{print $2}')
+    local destination
+    destination=$(echo "$1" | awk '{print $4}')
+    echo "The subdomain $1 is a $record_type record and points to $destination"
+}
+
+# Check if domain argument is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <domain> [<subdomain>]"
+    exit 1
+fi
+
+domain="$1"
+
+# Default subdomains to check if no subdomain argument is provided
+subdomains=("www" "lb-01" "web-01" "web-02")
+
+# If a subdomain argument is provided, only check that subdomain
+if [ -n "$2" ]; then
+    subdomains=("$2")
+fi
+
+# Loop through each subdomain and display its DNS record information
+for subdomain in "${subdomains[@]}"; do
+    # Query DNS record for the subdomain
+    record=$(dig +short "$subdomain.$domain" A)
+    
+    # Check if the record exists
+    if [ -n "$record" ]; then
+        # Display the DNS record information
+        display_dns_record "$record"
+    else
+        echo "No DNS record found for $subdomain.$domain"
+    fi
+done
