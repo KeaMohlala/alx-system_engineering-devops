@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# this script runs 'whoami' command as the user passed as an argument
+
+# check if username is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 username"
+    exit 1
+fi
+
+sudo -u "$1" whoami
